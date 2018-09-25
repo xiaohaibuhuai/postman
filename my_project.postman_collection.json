@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "459e27af-105d-47fd-8a2f-ba4ecd460d0d",
+		"name": "my_project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc86a183-c801-462d-8f25-29071a89872f",
+						"type": "text/javascript",
+						"exec": [
+							"console.log(\"jhhh\");",
+							"var array = [1,2,4];",
+							"pm.environment.set(\"obj1\",JSON.stringify(array));",
+							"var obj = {a:[1,2,3],b:{c:\"val\"}};",
+							"pm.environment.set(\"obj2\",JSON.stringify(obj));"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0a6b012c-121d-44a7-94b7-1be687fb37d1",
+						"type": "text/javascript",
+						"exec": [
+							"// test status",
+							"pm.test(\"response is ok\",function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"// test expect",
+							"pm.test(\"environment to be production\",function(){",
+							"    console.info(pm.environment.get(\"to\"));",
+							"    pm.expect(pm.environment.get(\"to\")).to.equal(\"test\");",
+							"});",
+							"// test response asster",
+							"pm.test(\"response should be okay to process\",function(){",
+							"    console.info(pm.response);",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.have.jsonBody(\"\");",
+							"    pm.response.to.be.not.have.jsonBody(\"error\");",
+							"});",
+							"// test pm.response.to.be*",
+							"pm.test(\"response must be valid and have a body\",function(){",
+							"    //pm.response.to.be.ok;",
+							"    //pm.response.to.be.withBody;",
+							"     ",
+							"});",
+							"pm.test(\"body matches string\",function(){",
+							"   pm.expect(pm.response.text()).to.include(\"login success\"); ",
+							"});",
+							"//console.log(pm.environment.get(\"obj1\"));",
+							"//console.log(pm.environment.get(\"obj2\"));",
+							"pm.test(\"Respnose time is less than 200ms\",function(){",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\",function(){",
+							"   pm.response.to.have.header(\"Content-Type\") ",
+							"});",
+							"",
+							"pm.test(\"Successful post request\",function(){",
+							"   pm.expect(pm.response.code).to.be.oneOf([201,202,200]) ",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}{{login}}",
+					"host": [
+						"{{url}}{{login}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{login}}",
+							"host": [
+								"{{login}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/html",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"login success\",\n    \"form\": {\n        \"foo\": \"1\"\n    },\n    \"status\":\"OK\"\n}"
+				}
+			]
+		},
+		{
+			"name": "addcard",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}{{addcard}}?uuid=18518092603&product_id=1101",
+					"host": [
+						"{{url}}{{addcard}}"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "18518092603"
+						},
+						{
+							"key": "product_id",
+							"value": "1101"
+						}
+					]
+				},
+				"description": "添加购物车"
+			},
+			"response": [
+				{
+					"name": "addcard",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}{{addcard}}?uuid=18518092603&product_id=1101",
+							"host": [
+								"{{url}}{{addcard}}"
+							],
+							"query": [
+								{
+									"key": "uuid",
+									"value": "18518092603"
+								},
+								{
+									"key": "product_id",
+									"value": "1101"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "",
+							"name": "Access-Control-Allow-Methods",
+							"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "",
+							"name": "Access-Control-Expose-Headers",
+							"description": "Lets a server whitelist headers that browsers are allowed to access."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "119",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 20 Sep 2018 10:41:36 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"77-j4Qgws6k5Yf3oFttWTJL/A\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Server",
+							"value": "nginx",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding",
+							"name": "Vary",
+							"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": {\n        \"name\": \"add success\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
